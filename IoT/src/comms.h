@@ -105,6 +105,7 @@ void mqttConnect()
         if (client.connect(mqttClient))
         {
             Serial.println("Connected to MQTT broker.");
+            // mqttTopic is "challenges/ESP32_Apaardeep"
             client.subscribe(mqttTopic);
             topicBuffer = "EventLog/" + String(mqttClient);
             mqttTopic = topicBuffer.c_str();
