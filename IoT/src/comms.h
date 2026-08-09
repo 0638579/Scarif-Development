@@ -131,3 +131,6 @@ void mqttSetup()
     client.setCallback(callback);
     mqttConnect();
 }
+
+
+// MQTT Topics - EventLog (uploads from sensor to broker), sensor Data (telemetry data), device Payload (gives data to ESP32 to act on).
