@@ -5,7 +5,14 @@ const char *mqttClient = "ESP32_Apaardeep"; // EDIT THIS FIELD
 
 const char *mqttTopic;
 
+#include "Arduino.h"
 #include "comms.h"
+
+#include <Wire.h>
+#include "Adafruit_ADT7410.h"
+
+// Create the ADT7410 temperature sensor object
+Adafruit_ADT7410 tempsensor = Adafruit_ADT7410();
 
 void performActionBasedOnPayload(String payload)
 {
@@ -29,7 +36,7 @@ void setup()
 {
     pinMode(LED_BUILTIN, OUTPUT);
     Serial.begin(9600);
-    
+
     wifiSetup();
     mqttSetup();
 
@@ -40,6 +47,15 @@ void setup()
     delay(1000);
 
     randomSeed(analogRead(A0));
+
+    // Make sure the sensor is found, you can also pass in a different i2c
+    // address with tempsensor.begin(0x49) for example
+    if (!tempsensor.begin())
+    {
+        Serial.println("Couldn't find ADT7410!");
+        while (1)
+            ;
+    }
 }
 
 void loop()
@@ -47,6 +63,11 @@ void loop()
     // 1. Maintain connection to the broker
     mqttConnect();
 
-    int randomNumber = random(1, 100001);
-    sendPeriodicUpdate("sensorData", String(randomNumber));
+    float tempInC = tempsensor.readTempC();
+    Serial.println(tempInC);
+
+    sendPeriodicUpdate("sensorData", String(tempInC));
+
+    client.loop(); // Handle incoming messages and maintain connection
+    delay(100);
 }
