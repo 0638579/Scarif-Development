@@ -16,7 +16,7 @@ Adafruit_ADT7410 tempsensor = Adafruit_ADT7410();
 
 void performActionBasedOnPayload(String payload)
 {
-    Serial.print("Payload received: ");
+    Serial.print("Payload: ");
     Serial.println(payload);
 
     // Turn built-in LED ON if payload starts with '1', else OFF
@@ -64,7 +64,7 @@ void loop()
     mqttConnect();
 
     float tempInC = tempsensor.readTempC();
-    Serial.println(tempInC);
+   // Serial.println(tempInC);
 
     sendPeriodicUpdate("sensorData", String(tempInC));
 
