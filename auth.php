@@ -1,15 +1,4 @@
 <?php
-require_once 'auth.php';
-
-// Pass an array of all roles allowed to view this page
-authorise(['admin', 'staff', 'student', 'guest']);
-?>
-
-// Page code continues below...
-
-
-
-<?php
 // src/auth.php - Session Management & Role-Based Access Control (RBAC)
 
 if (session_status() === PHP_SESSION_NONE) {

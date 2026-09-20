@@ -2,7 +2,7 @@
 require_once 'auth.php';
 
 // Enforce admin-only access
-authorise(['admin']);
+authorise(['admin', 'student', 'staff']);
 ?>
 
 // Page code continues below...

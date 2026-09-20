@@ -1,14 +1,4 @@
 <?php
-require_once 'auth.php';
-
-// Enforce admin-only access
-authorise(['admin']);
-?>
-
-// Page code continues below...
-
-
-<?php
 // src/index.php - System Landing Page & Navigation Hub
 session_start();
 
