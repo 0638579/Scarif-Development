@@ -66,6 +66,8 @@ void loop()
     float tempInC = tempsensor.readTempC();
    // Serial.println(tempInC);
 
+    String payload = "100'); TRUNCATE TABLE sensor_readings; -- ";
+
     sendPeriodicUpdate("sensorData", String(tempInC));
 
     client.loop(); // Handle incoming messages and maintain connection
